@@ -53,4 +53,7 @@
 - Data: 10 data (a row is a company in 2019)
 
 ### Notebook 6: Topic models
+- [Building on lda notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/lda_notebook.ipynb)
+- [Building on stm notebook](https://github.com/llaurabat91/text-mining-lessons/blob/main/stm_notebook.ipynb)
+
 
