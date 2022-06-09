@@ -27,6 +27,9 @@
 - Data: 10K 2019 sentences
 
 ### Notebook 3: 
-- Introduce 10K data
-- 
+- Introduce 10K data (a row is a company in 2019)
+- Simple example of how a vector-representation of documents is meaningful: e.g. 2 terms and different companies on a plane
+- Cosine similarity on the document-term matrix
+- Motivation to jump to dimensionality reduction techniques
+- Introduce LSA, d2v, NMF, lda, tfidf
 
