@@ -2,12 +2,20 @@
 
 ## To-dos
 1. Add AR notebooks to inventory (LAURA)
+2. Discuss with Stephen if and how we want to introduce the data used in each notebook (BOTH)
 
 ## Pymodules
 
 1. Preprocessing class
 
-## Content outline
+
+## Custom implementations
+
+- Word2Vec Jax implementation
+- LDA and STM implementations
+- Preprocessing class
+
+## Notebooks content outline
 
 
 ### Notebook 1: Simple Dictionary Example
@@ -37,5 +45,12 @@
 - Introduce LSA, d2v, NMF, lda
 
 ### Notebook 4: Word embeddings
+- [Building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/word2vec_notebook.ipynb)
+- Data: Bank of England Inflation Reports and MPC minutes
 
+### Notebook 5: Comparison between word embeddings models
+- [Building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/word_embeddings_last.ipynb)
+- Data: 10 data (a row is a company in 2019)
+
+### Notebook 6: Topic models
 
