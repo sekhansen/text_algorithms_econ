@@ -3,6 +3,7 @@
 ## To-dos
 1. Add AR notebooks to inventory (LAURA)
 2. Discuss with Stephen if and how we want to introduce the data used in each notebook (BOTH)
+3. Ask Stephen whether we want Jax/Numpyro notebooks on Bayesian regression in Appendix or not at all
 
 ## Pymodules
 
@@ -55,5 +56,7 @@
 ### Notebook 6: Topic models
 - [Building on lda notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/lda_notebook.ipynb)
 - [Building on stm notebook](https://github.com/llaurabat91/text-mining-lessons/blob/main/stm_notebook.ipynb)
+
+### Notebook 7: Sequ
 
 
