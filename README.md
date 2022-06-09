@@ -1,12 +1,10 @@
 # ARE_text_algorithms_economics
 
 ## To-dos
-1. Add AR notebooks to inventory (LAURA)
-2. Discuss with Stephen if and how we want to introduce the data used in each notebook (BOTH)
-3. Ask Stephen whether we want Jax/Numpyro notebooks on Bayesian regression in Appendix or not at all
-4. Ask Stephen if the repository is going to be completely public
-5. Consolidate a single data folder in Google Drive with a publicly accessible link (STEPHEN)
-6. Make all notebooks colab-friendly, including the code to work with Google Drive (BOTH)
+1. Discuss with Stephen if and how we want to introduce the data used in each notebook (BOTH)
+2. Ask Stephen whether we want Jax/Numpyro notebooks on Bayesian regression in Appendix or not at all (BOTH)
+3. Consolidate a single data folder in Google Drive with a publicly accessible link (STEPHEN)
+4. Make all notebooks colab-friendly, including the code to work with Google Drive (BOTH)
 
 ## Pymodules
 
