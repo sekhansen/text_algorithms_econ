@@ -20,9 +20,13 @@
 - Update preprocessing class
 - Show comparison with "simple" preprocessing from Notebook 1
 - Data: Bank of England MPC Minutes
+- End up producing clean tokens as well as doc-term frequency matrix
 
 ### Notebook 2 Appendix: Complex processing
 - [Mainly building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/preprocessing_notebook.ipynb)
 - Data: 10K 2019 sentences
 
+### Notebook 3: 
+- Introduce 10K data
+- 
 
