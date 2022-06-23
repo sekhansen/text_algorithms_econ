@@ -9,13 +9,12 @@
 ## Pymodules
 
 1. Preprocessing class
+2. Dictionary methods
 
-
-## Custom implementations
+## Custom implementations (advanced materials)
 
 - Word2Vec Jax implementation
 - LDA and STM implementations
-- Preprocessing class
 
 ## Notebooks content outline
 
@@ -44,20 +43,30 @@
 - Simple example of how a vector-representation of documents is meaningful: e.g. 2 terms and different companies on a plane
 - Cosine similarity on the document-term matrix (tfidf)
 - Motivation to jump to dimensionality reduction techniques e.g. with LSA
-- Introduce LSA, d2v, NMF, lda
+- Introduce LSA, NMF, LDA
+- Stephen's comment: We should separate the explanation of the models with their comparison. Either we presen the comparison at the end of this notebook or we create a new appendix notebook showing the comparison
 
-### Notebook 4: Word embeddings (YABRA)
-- [Building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/word2vec_notebook.ipynb)
-- Data: Bank of England Inflation Reports and MPC minutes
-
-### Notebook 5: Comparison between word embeddings models (LAURA)
-- [Building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/word_embeddings_last.ipynb)
-- Data: 10 data (a row is a company in 2019)
-
-### Notebook 6: Topic models (STEPHEN)
+### Notebook 4: Topic models (STEPHEN)
+- This notebook could be integrated into the previous one.
 - [Building on lda notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/lda_notebook.ipynb)
 - [Building on stm notebook](https://github.com/llaurabat91/text-mining-lessons/blob/main/stm_notebook.ipynb)
 
-### Notebook 7: Contextual embedding models - BERT and friends (YABRA)
+### Notebook 5: Word embeddings (YABRA)
+- [Building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/word2vec_notebook.ipynb)
+- Data: Bank of England Inflation Reports and MPC minutes
+- Introduce GloVe as another method to generate word embeddings
+
+### Notebook 5 Appendix: Comparison between word embeddings models (LAURA)
+- [Building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/word_embeddings_last.ipynb)
+- Data: 10K data (a row is a company in 2019)
+
+### Notebook 6: Contextual embedding models --> BERT (YABRA)
+- Data: 10K reports for selected firms
 - [Building on this notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/bert_introduction.ipynb)
 - Are these representations better than averaging word2vec vectors?
+
+### Notebook 6 Appendix: Extensions of BERT (YABRA)
+- Data: 10K reports for selected firms
+- How to browse and use models finetuned for a variety of tasks
+- Sentence BERT for sentence similarity
+- Sentiment analysis with BERT
