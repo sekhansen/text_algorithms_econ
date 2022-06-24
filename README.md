@@ -44,7 +44,7 @@
 - Cosine similarity on the document-term matrix (tfidf)
 - Motivation to jump to dimensionality reduction techniques e.g. with LSA
 - Introduce LSA, NMF, LDA
-- Stephen's comment: We should separate the explanation of the models with their comparison. Either we presen the comparison at the end of this notebook or we create a new appendix notebook showing the comparison
+- Stephen's comment: We should separate the explanation of the models with their comparison. Either we present the comparison at the end of this notebook or we create a new appendix notebook showing the comparison.
 
 ### Notebook 4: Topic models (STEPHEN)
 - This notebook could be integrated into the previous one.
