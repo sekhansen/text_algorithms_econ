@@ -33,34 +33,35 @@
 - Data: Bank of England MPC Minutes
 - End up producing clean tokens as well as doc-term frequency matrix
 
+### Notebook 2 Appendix: Other approaches to preprocessing (ELLIOTT)
+
+
 ### Notebook 2 Appendix: Complex processing (YABRA)
 - [Mainly building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/preprocessing_notebook.ipynb)
 - Data: 10K 2019 sentences
 
-### Notebook 3: Document embeddings (LAURA)
+### Notebook 3: Dimensionality reduction (LAURA)
 - [Mainly building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/similarity_results.ipynb)
 - Introduce 10K data (a row is a company in 2019)
 - Simple example of how a vector-representation of documents is meaningful: e.g. 2 terms and different companies on a plane
 - Cosine similarity on the document-term matrix (tfidf)
 - Motivation to jump to dimensionality reduction techniques e.g. with LSA
-- Introduce LSA, NMF, LDA
+- Introduce LSA, pLSA, NMF, LDA
 - Stephen's comment: We should separate the explanation of the models with their comparison. Either we present the comparison at the end of this notebook or we create a new appendix notebook showing the comparison.
 
-### Notebook 4: Topic models (STEPHEN)
-- This notebook could be integrated into the previous one.
-- [Building on lda notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/lda_notebook.ipynb)
-- [Building on stm notebook](https://github.com/llaurabat91/text-mining-lessons/blob/main/stm_notebook.ipynb)
-
-### Notebook 5: Word embeddings (YABRA)
+### Notebook 4: Word embeddings (YABRA)
 - [Building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/word2vec_notebook.ipynb)
 - Data: Bank of England Inflation Reports and MPC minutes
-- Introduce GloVe as another method to generate word embeddings
 
-### Notebook 5 Appendix: Comparison between word embeddings models (LAURA)
+### Notebook 4 Appendix: Comparison between word embeddings models (LAURA)
 - [Building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/word_embeddings_last.ipynb)
 - Data: 10K data (a row is a company in 2019)
+- Introduce GloVe and FastText
 
-### Notebook 6: Contextual embedding models --> BERT (YABRA)
+### Notebook 5: Document similarity
+- Doc2Vec, LSA, pLSA, NMF, LDA, TFIDF, averaging word embeddings
+
+### Notebook 6: BERT (YABRA)
 - Data: 10K reports for selected firms
 - [Building on this notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/bert_introduction.ipynb)
 - Are these representations better than averaging word2vec vectors?
