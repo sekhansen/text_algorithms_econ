@@ -1,10 +1,10 @@
 # ARE_text_algorithms_economics
 
 ## To-dos
-1. Discuss with Stephen if and how we want to introduce the data used in each notebook (BOTH)
-2. Ask Stephen whether we want Jax/Numpyro notebooks on Bayesian regression in Appendix or not at all (BOTH)
-3. Consolidate a single data folder in Google Drive with a publicly accessible link (STEPHEN)
-4. Make all notebooks colab-friendly, including the code to work with Google Drive (BOTH)
+1. Discuss with Stephen if and how we want to introduce the data used in each notebook
+2. Ask Stephen whether we want Jax/Numpyro notebooks on Bayesian regression in Appendix or not at all
+3. Consolidate a single data folder in Google Drive with a publicly accessible link (ALL)
+4. Make all notebooks colab-friendly, including the code to work with Google Drive (ALL)
 
 ## Pymodules
 
@@ -13,8 +13,8 @@
 
 ## Custom implementations (advanced materials)
 
-- Word2Vec Jax implementation
-- LDA and STM implementations
+- Word2Vec (JAX) implementation
+- LDA and STM (NUMPYRO) implementations
 
 ## Notebooks content outline
 
@@ -32,13 +32,9 @@
 - Show comparison with "simple" preprocessing from Notebook 1
 - Data: Bank of England MPC Minutes
 - End up producing clean tokens as well as doc-term frequency matrix
+- Explicitly show how off-the-shelf scikit-learn can also be used to pre-process text and build a doc-term matrix
 
 ### Notebook 2 Appendix: Other approaches to preprocessing (ELLIOTT)
-
-
-### Notebook 2 Appendix: Complex processing (YABRA)
-- [Mainly building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/preprocessing_notebook.ipynb)
-- Data: 10K 2019 sentences
 
 ### Notebook 3: Dimensionality reduction (LAURA)
 - [Mainly building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/similarity_results.ipynb)
