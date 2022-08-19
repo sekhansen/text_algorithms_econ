@@ -84,7 +84,7 @@ def gen_neg_samples(centers_idxs, contexts_idxs, vocab_idxs, num_ns):
     """
     
     window_size = np.int(contexts_idxs.shape[1]/2)
-    neg_idxs = [random.sample(set(vocab_idxs) - set(context) - set([center.item()]), window_size*num_ns*2) for context, center in zip(contexts_idxs, centers_idxs)]
+    neg_idxs = [random.sample(set(vocab_idxs) - set(context.tolist()) - set([center.item()]), window_size*num_ns*2) for context, center in zip(contexts_idxs, centers_idxs)]
 
                 
     return jnp.array(neg_idxs)
