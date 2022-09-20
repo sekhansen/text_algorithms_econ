@@ -1,69 +1,36 @@
-# ARE_text_algorithms_economics
-
-## To-dos
-1. Discuss with Stephen if and how we want to introduce the data used in each notebook
-2. Ask Stephen whether we want Jax/Numpyro notebooks on Bayesian regression in Appendix or not at all
-3. Consolidate a single data folder in Google Drive with a publicly accessible link (ALL)
-4. Make all notebooks colab-friendly, including the code to work with Google Drive (ALL)
-
-## Pymodules
-
-1. Preprocessing class
-2. Dictionary methods
-
-## Custom implementations (advanced materials)
-
-- Word2Vec (JAX) implementation
-- LDA and STM (NUMPYRO) implementations
+# Text Algorithms in Economics
 
 ## Notebooks content outline
 
+All notebooks contain a button that allows the user to execute the notebook in Google Colab:  ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) 
 
-### Notebook 1: Simple Dictionary Example (LAURA)
-- Show how a simple dictionary of positive and negative words can track the movement of the economy
-- Very simple preprocessing using standard packages
-- [Dictionary example taken from](https://github.com/sekhansen/course_unstructured_data/blob/main/notebooks/preprocessing_notebook.ipynb) 
-- Data: Bank of England MPC Minutes
-- Highlight the potential for more complete processing
+### Notebook 1: Simple dictionary examples with regular expressions
+- **Summary**: This notebook illustrates how a simple count of negative and positive terms can generate a sentiment index that correlates with GDP growth.
+- **Data**: Minutes from the Monetary Policy Committee at the Bank of England.
 
-### Notebook 2: Preprocessing (LAURA)
-- [Building on this notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/preprocessing_notebook.ipynb)
-- Update preprocessing class
-- Show comparison with "simple" preprocessing from Notebook 1
-- Data: Bank of England MPC Minutes
-- End up producing clean tokens as well as doc-term frequency matrix
-- Explicitly show how off-the-shelf scikit-learn can also be used to pre-process text and build a doc-term matrix
 
-### Notebook 2 Appendix: Other approaches to preprocessing (ELLIOTT)
+### Notebook 2: Preprocessing and document-term matrix creation
+- **Summary**: This notebook illustrates how to apply multiple preprocessing steps to clean text data and build a document-term matrix.
+- **Data**: Minutes from the Monetary Policy Committee at the Bank of England.
 
-### Notebook 3: Dimensionality reduction (LAURA)
-- [Mainly building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/similarity_results.ipynb)
-- Introduce 10K data (a row is a company in 2019)
-- Simple example of how a vector-representation of documents is meaningful: e.g. 2 terms and different companies on a plane
-- Cosine similarity on the document-term matrix (tfidf)
-- Motivation to jump to dimensionality reduction techniques e.g. with LSA
-- Introduce LSA, pLSA, NMF, LDA
-- Stephen's comment: We should separate the explanation of the models with their comparison. Either we present the comparison at the end of this notebook or we create a new appendix notebook showing the comparison.
+### Notebook 2 Appendix: Advanced preprocessing (ELLIOTT)
+- TODO (?)
+- Part of speech tagging
+- Syntactic dependency parsing
+- Named entity recognition
 
-### Notebook 4: Word embeddings (YABRA)
-- [Building on this notebook](https://github.com/yabramuvdi/imperial-workshop/blob/master/notebooks/word2vec_notebook.ipynb)
-- Data: Bank of England Inflation Reports and MPC minutes
+### Notebook 3: Dimensionality reduction with LDA
+- **Summary**: This notebook illustrates how to reduce the dimension of the document-term matrix with one particular method; Latent Dirichlet Allocation (LDA).
+- **Data**: USA State of the Union Addresses.
 
-### Notebook 4 Appendix: Comparison between word embeddings models (LAURA)
-- [Building on this notebook](https://github.com/llaurabat91/annual_review_project/blob/main/word_embeddings_last.ipynb)
-- Data: 10K data (a row is a company in 2019)
-- Introduce GloVe and FastText
+### Notebook 4: Word2Vec
+- **Summary**: This notebook illustrates how to estimate word embeddings using the word2vec algorithm.
+- **Data**: Bank of England Inflation Reports and Minutes from the Monetary Policy Committee at the Bank of England.
 
-### Notebook 5: Document similarity
-- Doc2Vec, LSA, pLSA, NMF, LDA, TFIDF, averaging word embeddings
+### Notebook 5: BERT 
+- **Summary**: This notebook illustrates multiple strategies to generate embedded representations of text sequences using BERT. It then compares the quality of these representations by using them for a regression task.
+- **Data**: 10-K reports for selected firms.
 
-### Notebook 6: BERT (YABRA)
-- Data: 10K reports for selected firms
-- [Building on this notebook](https://github.com/sekhansen/mres_methods_course/blob/main/notebooks/bert_introduction.ipynb)
-- Are these representations better than averaging word2vec vectors?
-
-### Notebook 6 Appendix: Extensions of BERT (YABRA)
-- Data: 10K reports for selected firms
-- How to browse and use models finetuned for a variety of tasks
-- Sentence BERT for sentence similarity
-- Sentiment analysis with BERT
+### Notebook 5 Appendix: Extensions of BERT
+- **Summary**: This notebook illustrates how to use BERT models that have been finetuned for particular tasks. Concretely, the notebook will explore a BERT model for sequence similarity ([*Sentence BERT*](https://www.sbert.net/index.html)) and a BERT model for sentiment analysis ([*Twitter roBERTa*](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment)).
+- **Data**: 10-K reports for selected firms.
