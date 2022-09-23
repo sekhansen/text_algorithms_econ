@@ -371,7 +371,7 @@ class RawDocs():
             raise ValueError("Score_type must be either \'df\' or \'tfidf\'.")
 
 
-    def dt_matrix_create(self, items, score_type='df', max_df=1.0, min_df=1, max_tfidf=0, min_tfidf=np.inf, tfidf_norm='l2'):
+    def dt_matrix_create(self, items, score_type='df', max_df=1.0, min_df=1, tfidf_norm='l2'):
         '''
         Produce a document term frequency or document tfidf matrix alongside a vocabulary for the specified items. 
         It allows to remove terms with high/low document frequency/tfidf.
@@ -383,7 +383,7 @@ class RawDocs():
         ignore terms that have a tfidf across the whole corpus strictly higher (lower) than the given threshold. 
         If float, the parameter represents a tfidf value, integer the ranking (0=highest tfidf ranking, number 
         of unique items=lowest tfidf ranking). 
-        tfidf_norm: {‘l1’, ‘l2’, None}, default=’l2’. Normalization technique applied to each term's tfidf score. 
+        tfidf_norm: {"l1", "l2", None}, default="l2". Normalization technique applied to each term's tfidf score. 
         '''
         
         self.vocabulary = {}
@@ -409,27 +409,30 @@ class RawDocs():
 
         elif score_type=='tfidf':
             self.tfidf_matrix = {}
-            def remove(tokens):
-                tokens = [t for t in tokens if t not in to_remove_low]
-                tokens = [t for t in tokens if t not in to_remove_high]
-                return tokens
 
-            if not hasattr(self, 'tfidf_ranking'):
-                self.get_term_ranking(items, score_type='tfidf')
-            ranking = np.array(self.tfidf_ranking[items])
+            # UPDATE: removal functionality has been moved to a separate function            
+            # def remove(tokens):
+            #     tokens = [t for t in tokens if t not in to_remove_low]
+            #     tokens = [t for t in tokens if t not in to_remove_high]
+            #     return tokens
 
-            if type(max_tfidf)==float:
-                to_remove_high = set([t[1] for t in ranking if float(t[0]) > max_tfidf])
-            else:
-                to_remove_high = set([t[1] for t in ranking if float(t[2]) < max_tfidf])
+            # if not hasattr(self, 'tfidf_ranking'):
+            #     self.get_term_ranking(items, score_type='tfidf')
+            # ranking = np.array(self.tfidf_ranking[items])
 
-            if type(min_tfidf)==float:
-                to_remove_low = set([t[1] for t in ranking if float(t[0]) < min_tfidf])
-            else:
-                to_remove_low = set([t[1] for t in ranking if float(t[2]) > min_tfidf])
+            # if type(max_tfidf)==float:
+            #     to_remove_high = set([t[1] for t in ranking if float(t[0]) > max_tfidf])
+            # else:
+            #     to_remove_high = set([t[1] for t in ranking if float(t[2]) < max_tfidf])
 
-            v = list(map(remove, v))
-            vectorizer = TfidfVectorizer(use_idf=True, norm=tfidf_norm, tokenizer=dummy, preprocessor=dummy) 
+            # if type(min_tfidf)==float:
+            #     to_remove_low = set([t[1] for t in ranking if float(t[0]) < min_tfidf])
+            # else:
+            #     to_remove_low = set([t[1] for t in ranking if float(t[2]) > min_tfidf])
+
+            # v = list(map(remove, v))
+
+            vectorizer = TfidfVectorizer(use_idf=True, norm=tfidf_norm, max_df=max_df, min_df=min_df, tokenizer=dummy, preprocessor=dummy) 
             self.tfidf_matrix[f'{items}'] = vectorizer.fit_transform(v).toarray()
             self.vocabulary[f'{items}'] = vectorizer.vocabulary_
 
@@ -444,6 +447,68 @@ class RawDocs():
             self.bigrams = [[t for t in doc if t in self.vocabulary[f'{items}']] for doc in self.bigrams]
         elif items == 'lemmas':
             self.lemmas = [[t for t in doc if t in self.vocabulary[f'{items}']] for doc in self.lemmas]
+
+
+    def rank_remove(self, items, score_type, min_cutoff_score=-np.inf, max_cutoff_score=np.inf):
+        """
+        remove items based on the df or tfidf (specified in "score_type") 
+        score being less than the cutoff score provided. 
+        The get_term_ranking() function needs to be called before.
+        """
+
+        # verify that get_term_ranking() has already been called and that
+        # a valid item has been provided
+        if score_type=="df":
+            try:
+                self.df_ranking[items]
+            except (AttributeError, KeyError):
+                print("Please run the get_term_ranking() function first with the appropriate arguments")
+                
+        elif score_type=="tfidf":
+            try:
+                self.tfidf_ranking[items]
+            except (AttributeError, KeyError):
+                print("Please run the get_term_ranking() function first with the appropriate arguments")
+                
+        else:
+            raise ValueError("Score type must be either \'df\' (document frequency) or \'tfidf\' (term frequency inverse document frequency).")
+
+        # auxiliary function to easily remove undesired tokens
+        def remove(tokens, to_remove):
+            if to_remove:
+                return [t for t in tokens if t not in to_remove]
+            else:
+                return tokens
+
+        # consolidate list of tokens to be removed
+        if score_type == "df":
+            to_remove_low = set([t[1] for t in self.df_ranking["stems"] if t[0] <= min_cutoff_score])
+            to_remove_high = set([t[1] for t in self.df_ranking["stems"] if t[0] > max_cutoff_score])
+
+        elif score_type == "tfidf":
+            to_remove_low = set([t[1] for t in self.tfidf_ranking["stems"] if t[0] <= min_cutoff_score])
+            to_remove_high = set([t[1] for t in self.tfidf_ranking["stems"] if t[0] > max_cutoff_score])
+
+        # remove tokens from the appropriate place
+        if items == 'tokens':
+            #self.tokens = list(map(remove, self.tokens))
+            self.tokens = [remove(d, to_remove_low) for d in self.tokens]
+            self.tokens = [remove(d, to_remove_high) for d in self.tokens]
+
+        elif items == 'lemmas':
+            #self.lemmas = list(map(remove, self.lemmas))
+            self.lemmas = [remove(d, to_remove_low) for d in self.lemmas]
+            self.lemmas = [remove(d, to_remove_high) for d in self.lemmas]
+
+        elif items == 'stems':
+            #self.stems = list(map(remove, self.stems))
+            self.stems = [remove(d, to_remove_low) for d in self.stems]
+            self.stems = [remove(d, to_remove_high) for d in self.stems]
+        
+        elif items == "bigrams":
+            #self.bigrams = list(map(remove, self.bigrams))
+            self.bigrams = [remove(d, to_remove_low) for d in self.bigrams]
+            self.bigrams = [remove(d, to_remove_high) for d in self.bigrams]
 
 
 # %%
