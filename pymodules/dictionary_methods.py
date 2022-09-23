@@ -9,11 +9,20 @@ import re
 import math
 import pickle
 import random
+import nltk
+from nltk import SnowballStemmer
 
 import preprocessing_class as pc
 
-def dict_example(data_path):
+# lemmatize with standard spaCy lemmatizer (takes a couple of minutes)
+def lemmatize_token(token, nlp_standard):
+    lemmatized = nlp_standard(token)
+    return lemmatized[0].lemma_
+
+
+def dict_example(data_path, items, replacing_dict):
     
+    # read MPC minutes
     data = pd.read_csv(data_path, delimiter='\t', header=0, names=['date', 'minutes'])
 
     # turn date into date format and create quarter column
@@ -27,70 +36,61 @@ def dict_example(data_path):
               \w+(?:-\w+)*        # word characters with internal hyphens
               | [][.,;"'?():-_`]  # preserve punctuation as separate tokens
               '''
+    # initialize the class with the text data and some parameters
+    prep = pc.RawDocs(data.minutes, stopwords='long', lower_case=True, contraction_split=True, tokenization_pattern=pattern)
     
-    # initialize object
-    prep = pc.RawDocs(data.minutes, stopwords='long', contraction_split=True, tokenization_pattern=pattern)
-    # replace expressions
-    replacing_dict = {'financial intermediation':'financial-intermediation', 'interest rate':'interest-rate'}
-    prep.phrase_replace(replace_dict=replacing_dict)
+    # replace some specific phrases of interest
+    prep.phrase_replace(replace_dict=replacing_dict, case_sensitive_replacing=False)
+
     # lower-case text, expand contractions and initialize stopwords list
     prep.basic_cleaning()
+
     # split the documents into tokens
     prep.tokenize_text()
+
+    # clean tokens
     punctuation = string.punctuation.replace("-", "")
     prep.token_clean(length=2, punctuation=punctuation, numbers=True)
-    prep.stopword_remove('tokens')
-    prep.stem()
-    prep.lemmatize()
-    prep.dt_matrix_create(items='lemmas', score_type='df', min_df=4)
-    
+
+    # stem and lemmatize tokens
+    if items == "stems":
+        prep.stem()
+    elif items == "lemmas":
+        prep.lemmatize()
+
+    # create document-term matrix
+    prep.dt_matrix_create(items=items, score_type='df', min_df=4)
+
     return data, prep
 
 
-def pos_neg_counts(prep_dict, pos_words, neg_words):
+def pos_neg_counts(prep_dict, items, pos_terms, neg_terms, nlp_standard):
     
-    pattern = r'''
-              (?x)                # set flag to allow verbose regexps (to separate logical sections of pattern and add comments)
-              \w+(?:-\w+)*        # word characters with internal hyphens
-              | [][.,;"'?():-_`]  # preserve punctuation as separate tokens
-              '''
-    
-    punctuation = string.punctuation.replace("-", "")
-    
-    pos_clean = pc.RawDocs(pos_words, stopwords='long', contraction_split=True, tokenization_pattern=pattern)
-    pos_clean.basic_cleaning()
-    pos_clean.tokenize_text()
-    pos_clean.token_clean(length=2,punctuation=punctuation, numbers=True)
-    pos_clean.lemmatize() 
-    pos_clean.stem() 
+    if items == "lemmas":
+        # lemmatize the dictionary terms
+        pos_terms = [lemmatize_token(w, nlp_standard) for w in pos_terms]
+        neg_terms = [lemmatize_token(w, nlp_standard) for w in neg_terms]
 
-    neg_clean = pc.RawDocs(neg_words, stopwords='long', contraction_split=True, tokenization_pattern=pattern)
-    neg_clean.basic_cleaning()
-    neg_clean.tokenize_text()
-    neg_clean.token_clean(length=2,punctuation=punctuation, numbers=True)
-    neg_clean.lemmatize() 
-    neg_clean.stem()
+    elif items == "stems":
+        stemmer = SnowballStemmer(language='english')
+        pos_terms = [stemmer.stem(t) for t in pos_terms]
+        pos_terms = list(set(pos_terms))
+        neg_terms = [stemmer.stem(t) for t in neg_terms]
+        neg_terms = list(set(neg_terms))
 
-    #pos_lemmas = set([el[0] for el in pos_clean.lemmas])
-    #neg_lemmas = set([el[0] for el in neg_clean.lemmas])
-    
-    pos_lemmas = set([el[0] for el in pos_clean.lemmas if el])
-    neg_lemmas = set([el[0] for el in neg_clean.lemmas if el])
-    pos_lemmas0 = pos_lemmas
-    neg_lemmas0 = neg_lemmas
-    pos_lemmas = [l for l in pos_lemmas0 if l not in neg_lemmas0]
-    neg_lemmas = [l for l in neg_lemmas0 if l not in pos_lemmas0]
+    # build the document-term matrix
+    prep_dict.dt_matrix_create(items=items, score_type='df', min_df=10)
 
-    prep_dict.get_term_ranking(items='lemmas', score_type='df')
-    prep_dict.dt_matrix_create(items='lemmas', score_type='df')
+    # find the position of the terms
+    pos_ixs = [v for k,v in prep_dict.vocabulary[items].items() if k in pos_terms]
+    neg_ixs = [v for k,v in prep_dict.vocabulary[items].items() if k in neg_terms]
 
-    pos_ixs = [v for k,v in prep_dict.vocabulary['lemmas'].items() if k in pos_lemmas]
-    neg_ixs = [v for k,v in prep_dict.vocabulary['lemmas'].items() if k in neg_lemmas]
-
-    pos_counts = np.take(prep_dict.df_matrix['lemmas'], pos_ixs, axis=1)
+    # count positive terms
+    pos_counts = np.take(prep_dict.df_matrix[items], pos_ixs, axis=1)
     pos_counts = pos_counts.sum(axis=1)
 
-    neg_counts = np.take(prep_dict.df_matrix['lemmas'], neg_ixs, axis=1)
+    # count negative terms
+    neg_counts = np.take(prep_dict.df_matrix[items], neg_ixs, axis=1)
     neg_counts = neg_counts.sum(axis=1)
     
     return pos_counts, neg_counts
