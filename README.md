@@ -8,16 +8,9 @@ All notebooks contain a button that allows the user to execute the notebook in G
 - **Summary**: This notebook illustrates how a simple count of negative and positive terms can generate a sentiment index that correlates with GDP growth.
 - **Data**: Minutes from the Monetary Policy Committee at the Bank of England.
 
-
 ### Notebook 2: Preprocessing and document-term matrix creation
 - **Summary**: This notebook illustrates how to apply multiple preprocessing steps to clean text data and build a document-term matrix.
 - **Data**: Minutes from the Monetary Policy Committee at the Bank of England.
-
-### Notebook 2 Appendix: Advanced preprocessing (ELLIOTT)
-- TODO (?)
-- Part of speech tagging
-- Syntactic dependency parsing
-- Named entity recognition
 
 ### Notebook 3: Dimensionality reduction with LDA
 - **Summary**: This notebook illustrates how to reduce the dimension of the document-term matrix with one particular method; Latent Dirichlet Allocation (LDA).
