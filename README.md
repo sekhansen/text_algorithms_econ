@@ -14,7 +14,7 @@ All notebooks contain a button that allows the user to execute the notebook in G
 
 ### Notebook 3: Dimensionality reduction with LDA
 - **Summary**: This notebook illustrates how to reduce the dimension of the document-term matrix with one particular method; Latent Dirichlet Allocation (LDA).
-- **Data**: USA State of the Union Addresses.
+- **Data**: USA State of the Union Addresses and Minutes from the Monetary Policy Committee at the Bank of England.
 
 ### Notebook 4: Word2Vec
 - **Summary**: This notebook illustrates how to estimate word embeddings using the word2vec algorithm.
