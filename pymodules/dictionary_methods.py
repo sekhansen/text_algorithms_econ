@@ -36,20 +36,39 @@ def dict_example(data_path, items, replacing_dict):
               \w+(?:-\w+)*        # word characters with internal hyphens
               | [][.,;"'?():-_`]  # preserve punctuation as separate tokens
               '''
-    # initialize the class with the text data and some parameters
-    prep = pc.RawDocs(data.minutes, stopwords='long', lower_case=True, contraction_split=True, tokenization_pattern=pattern)
     
-    # replace some specific phrases of interest
-    prep.phrase_replace(replace_dict=replacing_dict, case_sensitive_replacing=False)
+    # initialize the class with the text data and some parameters
+    prep = pc.RawDocs(data.minutes)
 
-    # lower-case text, expand contractions and initialize stopwords list
-    prep.basic_cleaning()
+    # replace some specific phrases of interest
+    prep.phrase_replace(replace_dict=replacing_dict, 
+                        sort_dict=True,
+                        case_sensitive_replacing=False)
+    
+    # lower-case text and expand contractions
+    prep.basic_cleaning(lower_case=True,
+                        contraction_split=True)
 
     # split the documents into tokens
-    prep.tokenize_text()
+    prep.tokenize_text(tokenization_pattern=pattern)
 
-    # clean tokens
+    # clean tokens (remove non-ascii characters, remove short tokens, remove punctuation and numbers)
     punctuation = string.punctuation.replace("-", "")
+    prep.token_clean(length=2, 
+                    punctuation=punctuation, 
+                    numbers=True)
+
+    # remove stopwords
+    stopwords_type = 'long'
+    if items == "tokens":
+        prep.stopword_remove(items='tokens', stopwords=stopwords_type)
+    elif items == "lemmas":
+        prep.lemmatize()
+        prep.stopword_remove("lemmas", stopwords=stopwords_type)
+    elif items == "stems":
+        prep.stem()
+        prep.stopword_remove("stems", stopwords=stopwords_type)
+
     prep.token_clean(length=2, punctuation=punctuation, numbers=True)
 
     # stem and lemmatize tokens
