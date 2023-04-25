@@ -20,10 +20,13 @@ All notebooks contain a button that allows the user to execute the notebook in G
 - **Summary**: This notebook illustrates how to estimate word embeddings using the word2vec algorithm.
 - **Data**: Bank of England Inflation Reports and Minutes from the Monetary Policy Committee at the Bank of England.
 
-### Notebook 5: BERT 
+### Notebook 5: Large language models for feature generation
 - **Summary**: This notebook illustrates multiple strategies to generate embedded representations of text sequences using BERT. It then compares the quality of these representations by using them for a regression task.
 - **Data**: 10-K reports for selected firms.
 
-### Notebook 5 Appendix: Extensions of BERT
-- **Summary**: This notebook illustrates how to use BERT models that have been finetuned for particular tasks. Concretely, the notebook will explore a BERT model for sequence similarity ([*Sentence BERT*](https://www.sbert.net/index.html)) and a BERT model for sentiment analysis ([*Twitter roBERTa*](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment)).
+### Notebook 6: Finetuning a large language model
+- **Summary**: This notebook illustrates how to finetune a large language model for a particular classification task.
 - **Data**: 10-K reports for selected firms.
+
+### Notebook 7: GPT demonstration
+- **Summary**: This notebook shows how to interact with GPT using OpenAI's API.
