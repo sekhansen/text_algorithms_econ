@@ -1,5 +1,7 @@
 # Text Algorithms in Economics
 
+Companion notebooks to ``Text Algorithms in Economics'' by Elliott Ash and Stephen Hansen.  If you reuse in teaching or research, please cite the published article in the *Annual Review of Economics* (2023).
+
 ## Notebooks content outline
 
 All notebooks contain a button that allows the user to execute the notebook in Google Colab:  ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) 
