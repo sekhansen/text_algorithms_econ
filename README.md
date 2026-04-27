@@ -1,6 +1,13 @@
 # Text Algorithms in Economics
 
-Companion python notebooks to the ['Text Algorithms in Economics' article](https://www.annualreviews.org/content/journals/10.1146/annurev-economics-082222-074352) by Elliott Ash and Stephen Hansen. Notebooks developed by [Yabra Muvdi](https://github.com/yabramuvdi). If you reuse in teaching or research, please cite the published article in the *Annual Review of Economics* (2023).
+Companion python notebooks to the ['Text Algorithms in Economics' article](https://www.annualreviews.org/content/journals/10.1146/annurev-economics-082222-074352) by Elliott Ash and Stephen Hansen. Notebooks developed by [Yabra Muvdi](https://github.com/yabramuvdi). If you reuse in teaching or research, please cite the published article in the *Annual Review of Economics* (2023).  See outline below for description of contents.
+
+## Update
+
+Due to the rapid evolution of this topic, updated materials appear in follow-on short courses, listed below.  A selection includes:
+1. Columbia University - https://github.com/sekhansen/columbia_lectures_2025
+2. Bank of Italy + EIEF - https://github.com/unstructured-data/BdI_EIEF
+3. IESE + FRA - https://github.com/unstructured-data/IESE-FRA-seminar-24
 
 ## Notebooks content outline
 
